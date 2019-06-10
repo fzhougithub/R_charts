@@ -1,0 +1,12 @@
+genus_percent_chart<-function(csv_filepath,xname,yname){
+width=89
+heigh=59
+mydata<-read.csv(csv_filepath,header=T,sep='\t')
+x=c(mydata['name'])
+Genus<-unlist(x,use.names=FALSE)
+Percentage<-unlist(mydata["percentage"])
+dt=data.frame(Genus,Percentage)
+library(ggplot2)
+p = ggplot(dt, aes(x = reorder(Genus,Percentage), y = Percentage,fill=Genus,group = factor(1)))
+p + geom_bar(stat='identity',width=0.5) + theme(legend.position = "none",axis.text.x = element_text(angle=90,hjust=0.5,vjust=0.5)) + coord_flip()
+}
